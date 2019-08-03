@@ -1,0 +1,2 @@
+# Ignore postgres volume folder
+DB1/postgres/

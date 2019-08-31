@@ -1,0 +1,44 @@
+1. Obtenha o nome e a cidade de todos os fornecedores. 	
+	SELECT nm_fornecedor, nm_cidadefornecedor FROM fornecedor
+
+2. Obtenha o nome de todas as peças com peso superior a 15.	 	
+	SELECT nm_peca FROM peca WHERE nu_pesopeca > 15
+
+3. Obtenha o nome de todos os fornecedores que forneceram alguma peça para o projeto 1. 	
+	SELECT nm_fornecedor FROM fornecedor fo INNER JOIN fornecimento fe 
+	ON fo.nu_fornecedor = fe.nu_fornecedor
+	WHERE fe.nu_projeto = 1
+
+4. Obtenha a quantidade total de peças fornecidas ao projeto 2.	
+	SELECT SUM(nu_qtdpecafornec) AS qtd_total FROM fornecimento 
+	WHERE nu_projeto = 2
+
+5. Obtenha a quantidade total de peças fornecidas pelo fornecedor de cód. 1 para o projeto 1.
+	SELECT SUM(nu_qtdpecafornec) AS qtd_total FROM fornecimento 
+	WHERE nu_projeto = 1 AND nu_fornecedor = 1
+
+6. Quais são, caso existam, os fornecedores de nenhuma peça a nenhum projeto.
+	FROM fornecedor 
+	SELECT nm_fornecedor, nu_fornecedor 
+	WHERE nu_fornecedor NOT IN (
+		SELECT nu_fornecedor 
+		FROM fornecimento
+	)
+
+7. Obtenha o nome e quantidade total de peças fornecidas em todos os projetos, ordenando o
+resultado por código de peça.
+	SELECT nm_peca, p.nu_peca, SUM(nu_qtdpecafornec)
+	FROM peca p 
+	INNER JOIN fornecimento f
+	ON p.nu_peca = f.nu_peca
+	GROUP BY 2
+	ORDER BY 2	
+
+8. Quantos projetos existem cadastrados no banco de dados?
+	SELECT COUNT(nu_projeto) AS qtd_projetos
+	FROM projeto
+
+
+	
+	
+
